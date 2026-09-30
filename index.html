@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>60 DAY — Transformation Tracker</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+    --bg:#07090d;
+    --card:#10141c;
+    --card2:#151a23;
+    --text:#f5f7fa;
+    --muted:#8993a4;
+    --line:rgba(255,255,255,.08);
+    --green:#72f5a5;
+    --green2:#22c55e;
+    --blue:#5ea7ff;
+    --red:#ff667a;
+    --yellow:#ffd166;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%,rgba(114,245,165,.09),transparent 25%),
+        radial-gradient(circle at 85% 20%,rgba(94,167,255,.08),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(114,245,165,.04);
+    filter:blur(100px);
+    top:-200px;
+    left:-200px;
+    z-index:-1;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(94,167,255,.04);
+    filter:blur(100px);
+    bottom:-200px;
+    right:-200px;
+    z-index:-1;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(18px);
+    background:rgba(7,9,13,.72);
+    border-bottom:1px solid var(--line);
+}
+
+.nav{
+    max-width:1200px;
+    margin:auto;
+    padding:18px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--green);
+}
+
+.music-btn{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:white;
+    padding:10px 15px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.music-btn:hover{
+    border-color:var(--green);
+    transform:translateY(-2px);
+}
+
+/* HERO */
+
+.hero{
+    max-width:1200px;
+    margin:auto;
+    padding:75px 22px 45px;
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:40px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-flex;
+    padding:8px 13px;
+    border-radius:100px;
+    border:1px solid rgba(114,245,165,.25);
+    background:rgba(114,245,165,.06);
+    color:var(--green);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(42px,7vw,88px);
+    line-height:.92;
+    letter-spacing:-5px;
+    margin-bottom:24px;
+}
+
+.hero h1 span{
+    color:var(--green);
+}
+
+.hero p{
+    color:var(--muted);
+    max-width:650px;
+    line-height:1.8;
+    font-size:15px;
+}
+
+.quote{
+    margin-top:25px;
+    border-left:2px solid var(--green);
+    padding-left:15px;
+    color:#dce2ea;
+    font-weight:600;
+}
+
+/* RING */
+
+.progress-card{
+    background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.ring{
+    width:220px;
+    height:220px;
+    margin:auto;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:conic-gradient(var(--green) 0deg, var(--green) 0deg, #202631 0deg);
+    position:relative;
+    transition:1s;
+}
+
+.ring::before{
+    content:"";
+    position:absolute;
+    inset:14px;
+    background:var(--card);
+    border-radius:50%;
+}
+
+.ring-content{
+    position:relative;
+    z-index:2;
+}
+
+.percent{
+    font-size:42px;
+    font-weight:900;
+}
+
+.day-label{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.progress-card h3{
+    margin-top:20px;
+}
+
+/* CONTAINER */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:0 22px 70px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin:20px 0;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:22px;
+    border-radius:18px;
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-5px);
+    border-color:rgba(114,245,165,.25);
+}
+
+.stat small{
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.stat strong{
+    display:block;
+    font-size:30px;
+    margin-top:8px;
+}
+
+/* SECTION */
+
+.section{
+    margin-top:45px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:18px;
+}
+
+.section-title h2{
+    font-size:24px;
+}
+
+.section-title span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* DAILY */
+
+.daily{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:22px;
+}
+
+.card h3{
+    margin-bottom:18px;
+}
+
+.meal{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.meal:last-child{
+    border-bottom:0;
+}
+
+.meal-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.icon{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:rgba(114,245,165,.08);
+}
+
+/* CHECKBOX */
+
+.check{
+    appearance:none;
+    width:22px;
+    height:22px;
+    border:1px solid #47505f;
+    border-radius:7px;
+    cursor:pointer;
+    position:relative;
+    transition:.2s;
+}
+
+.check:checked{
+    background:var(--green);
+    border-color:var(--green);
+}
+
+.check:checked::after{
+    content:"✓";
+    color:#06110b;
+    font-weight:900;
+    position:absolute;
+    left:5px;
+    top:1px;
+}
+
+/* WORKOUT */
+
+.workouts{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.workout{
+    padding:20px;
+    border:1px solid var(--line);
+    background:var(--card);
+    border-radius:18px;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.workout:hover{
+    transform:translateY(-6px);
+}
+
+.workout.active{
+    border-color:var(--green);
+    background:rgba(114,245,165,.05);
+}
+
+.workout-icon{
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+.workout h3{
+    margin-bottom:8px;
+}
+
+.workout p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
+}
+
+/* CALENDAR */
+
+.calendar{
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+    gap:7px;
+}
+
+.day{
+    aspect-ratio:1;
+    border:1px solid var(--line);
+    background:#0c1016;
+    border-radius:9px;
+    display:grid;
+    place-items:center;
+    font-size:11px;
+    color:var(--muted);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.day:hover{
+    transform:scale(1.08);
+    border-color:var(--green);
+}
+
+.day.done{
+    background:var(--green);
+    color:#06110b;
+    border-color:var(--green);
+    font-weight:800;
+}
+
+.day.today{
+    box-shadow:0 0 0 2px rgba(114,245,165,.3);
+}
+
+/* WEIGHT */
+
+.weight-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.input-group label{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.input{
+    width:100%;
+    background:#090c11;
+    color:white;
+    border:1px solid var(--line);
+    padding:13px;
+    border-radius:12px;
+    outline:none;
+}
+
+.input:focus{
+    border-color:var(--green);
+}
+
+.save-btn{
+    margin-top:15px;
+    background:var(--green);
+    color:#06110b;
+    border:0;
+    padding:13px 18px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+/* MOTIVATION */
+
+.motivation{
+    margin-top:45px;
+    padding:35px;
+    border-radius:25px;
+    background:
+        linear-gradient(135deg,rgba(114,245,165,.1),rgba(94,167,255,.05)),
+        var(--card);
+    border:1px solid var(--line);
+    text-align:center;
+}
+
+.motivation h2{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.motivation p{
+    color:var(--muted);
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#5f6877;
+    font-size:12px;
+}
+
+/* PARTICLES */
+
+.particle{
+    position:fixed;
+    width:4px;
+    height:4px;
+    background:var(--green);
+    border-radius:50%;
+    opacity:.35;
+    pointer-events:none;
+    animation:float 8s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    20%{opacity:.4}
+    80%{opacity:.4}
+    to{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .daily{
+        grid-template-columns:1fr;
+    }
+
+    .workouts{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .hero{
+        padding-top:50px;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .workouts{
+        grid-template-columns:1fr;
+    }
+
+    .calendar{
+        grid-template-columns:repeat(10,1fr);
+        gap:4px;
+    }
+
+    .day{
+        font-size:9px;
+        border-radius:6px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+        <div class="logo">60<span>DAY</span> / RESET</div>
+
+        <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
+            🎵 MUSIC OFF
+        </button>
+    </div>
+</header>
+
+<main>
+
+<section class="hero">
+
+    <div>
+        <div class="badge">PERSONAL TRANSFORMATION PROJECT • 60 DAYS</div>
+
+        <h1>
+            BUILD<br>
+            YOUR<br>
+            <span>DISCIPLINE.</span>
+        </h1>
+
+        <p>
+            Dua bulan. Satu tujuan: membangun kebiasaan yang lebih konsisten.
+            Catat makanan, olahraga, progress, dan jangan biarkan satu hari buruk
+            menghancurkan perjalanan lo.
+        </p>
+
+        <div class="quote">
+            "Motivasi bikin lo mulai. Disiplin bikin lo selesai."
+        </div>
+    </div>
+
+    <div class="progress-card">
+
+        <div class="ring" id="ring">
+
+            <div class="ring-content">
+                <div class="percent" id="percent">0%</div>
+                <div class="day-label">DAY <span id="currentDay">1</span> / 60</div>
+            </div>
+
+        </div>
+
+        <h3>YOUR 60 DAY JOURNEY</h3>
+
+    </div>
+
+</section>
+
+
+<div class="container">
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <small>Progress</small>
+            <strong id="statProgress">0%</strong>
+        </div>
+
+        <div class="stat">
+            <small>Hari Selesai</small>
+            <strong id="statDays">0 / 60</strong>
+        </div>
+
+        <div class="stat">
+            <small>Workout</small>
+            <strong id="statWorkout">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Current Streak</small>
+            <strong id="statStreak">0 🔥</strong>
+        </div>
+
+    </div>
+
+
+    <!-- DAILY ROUTINE -->
+
+    <section class="section">
+
+        <div class="section-title">
+            <h2>Daily Routine</h2>
+            <span>CHECKLIST HARIAN</span>
+        </div>
+
+        <div class="daily">
+
+            <div class="card">
+
+                <h3>🥣 Makanan & Minuman</h3>
+
+                <div class="meal">
+                    <div class="meal-left">
+                        <div class="icon">🌅</div>
+                        <div>
+                            <strong>Pagi</strong>
+                            <p style="color:var(--muted);font-size:12px">
+                                Oatmeal
+                            </p>
+                        </div>
+                    </div>
+
+                    <input class="check routine" type="checkbox">
+                </div>
+
+                <div class="meal">
+                    <div class="meal-left">
+                        <div class="icon">💧</div>
+                        <div>
+                            <strong>Siang</strong>
+                            <p style="color:var(--muted);font-size:12px">
+                                Air putih
+                            </p>
+                        </div>
+                    </div>
+
+                    <input class="check routine" type="checkbox">
+                </div>
+
+                <div class="meal">
+                    <div class="meal-left">
+                        <div class="icon">💧</div>
+                        <div>
+                            <strong>Sore</strong>
+                            <p style="color:var(--muted);font-size:12px">
+                                Air putih
+                            </p>
+                        </div>
+                    </div>
+
+                    <input class="check routine" type="checkbox">
+                </div>
+
+                <div class="meal">
+                    <div class="meal-left">
+                        <div class="icon">🥤</div>
+                        <div>
+                            <strong>Malam</strong>
+                            <p style="color:var(--muted);font-size:12px">
+                                Jus / Air putih
+                            </p>
+                        </div>
+                    </div>
+
+                    <input class="check routine" type="checkbox">
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🧠 Mental Checklist</h3>
+
+                <div class="meal">
+                    <span>Bangun sesuai target</span>
+                    <input class="check routine" type="checkbox">
+                </div>
+
+                <div class="meal">
+                    <span>Tidak menyerah hari ini</span>
+                    <input class="check routine" type="checkbox">
+                </div>
+
+                <div class="meal">
+                    <span>Cukup minum</span>
+                    <input class="check routine" type="checkbox">
+                </div>
+
+                <div class="meal">
+                    <span>Tidur sesuai target</span>
+                    <input class="check routine" type="checkbox">
+                </div>
+
+                <div class="meal">
+                    <span>Catat progress</span>
+                    <input class="check routine" type="checkbox">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WORKOUT -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>Workout Arsenal</h2>
+
+            <span>
+                MAKS. 4X / MINGGU
+            </span>
+
+        </div>
+
+        <div class="workouts">
+
+            <div class="workout" onclick="toggleWorkout(this)">
+                <div class="workout-icon">🏋️</div>
+                <h3>GYM</h3>
+                <p>
+                    Strength training.
+                    Catat latihan yang dilakukan.
+                </p>
+            </div>
+
+            <div class="workout" onclick="toggleWorkout(this)">
+                <div class="workout-icon">🏃</div>
+                <h3>JOGGING</h3>
+                <p>
+                    Cardio ringan–sedang.
+                    Fokus konsistensi.
+                </p>
+            </div>
+
+            <div class="workout" onclick="toggleWorkout(this)">
+                <div class="workout-icon">⚽</div>
+                <h3>SEPAK BOLA</h3>
+                <p>
+                    Aktivitas olahraga sekaligus
+                    fun bersama teman.
+                </p>
+            </div>
+
+            <div class="workout" onclick="toggleWorkout(this)">
+                <div class="workout-icon">🥅</div>
+                <h3>FUTSAL</h3>
+                <p>
+                    High intensity activity.
+                    Tetap perhatikan recovery.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CALENDAR -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>60 Day Calendar</h2>
+
+            <span>
+                CLICK HARI YANG SELESAI
+            </span>
+
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+
+    </section>
+
+
+    <!-- WEIGHT -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>Body Progress</h2>
+
+            <span>
+                TRACK YOUR NUMBERS
+            </span>
+
+        </div>
+
+        <div class="card">
+
+            <div class="weight-box">
+
+                <div class="input-group">
+                    <label>Berat Awal (KG)</label>
+
+                    <input
+                        class="input"
+                        id="startWeight"
+                        type="number"
+                        placeholder="Contoh: 86.5"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Berat Sekarang (KG)</label>
+
+                    <input
+                        class="input"
+                        id="currentWeight"
+                        type="number"
+                        placeholder="Contoh: 84.2"
+                    >
+                </div>
+
+            </div>
+
+            <button class="save-btn" onclick="saveWeight()">
+                SIMPAN PROGRESS
+            </button>
+
+            <p id="weightResult"
+               style="margin-top:15px;color:var(--muted);font-size:13px">
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- MOTIVATION -->
+
+    <section class="motivation">
+
+        <h2>DON'T BREAK THE CHAIN. 🔥</h2>
+
+        <p>
+            Lo nggak harus sempurna selama 60 hari.
+            Yang penting jangan berhenti.
+        </p>
+
+    </section>
+
+</div>
+
+</main>
+
+
+<footer>
+    60 DAY RESET • Personal Progress Tracker
+</footer>
+
+
+<!-- AUDIO -->
+
+<audio id="music" loop>
+    <!--
+    GANTI URL DI BAWAH DENGAN FILE MUSIK MILIK LO.
+    CONTOH:
+    src="music/motivation.mp3"
+    -->
+</audio>
+
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+let data = JSON.parse(
+    localStorage.getItem("60dayReset")
+) || {
+
+    days: [],
+
+    workouts: 0,
+
+    startWeight: "",
+
+    currentWeight: ""
+
+};
+
+
+/* =========================
+   CALENDAR
+========================= */
+
+const calendar =
+    document.getElementById("calendar");
+
+for(let i = 1; i <= 60; i++){
+
+    const day =
+        document.createElement("div");
+
+    day.className = "day";
+
+    day.innerText = i;
+
+    if(data.days.includes(i)){
+        day.classList.add("done");
+    }
+
+    day.onclick = function(){
+
+        if(data.days.includes(i)){
+
+            data.days =
+                data.days.filter(x => x !== i);
+
+            day.classList.remove("done");
+
+        }else{
+
+            data.days.push(i);
+
+            day.classList.add("done");
+
+        }
+
+        saveData();
+        updateStats();
+
+    };
+
+    calendar.appendChild(day);
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateStats(){
+
+    const completed =
+        data.days.length;
+
+    const progress =
+        Math.round((completed / 60) * 100);
+
+    document.getElementById("percent")
+        .innerText = progress + "%";
+
+    document.getElementById("statProgress")
+        .innerText = progress + "%";
+
+    document.getElementById("statDays")
+        .innerText = completed + " / 60";
+
+    document.getElementById("statWorkout")
+        .innerText = data.workouts;
+
+    document.getElementById("currentDay")
+        .innerText =
+        Math.min(completed + 1,60);
+
+    updateRing(progress);
+
+    updateStreak();
+
+}
+
+
+/* =========================
+   RING
+========================= */
+
+function updateRing(progress){
+
+    const degrees =
+        progress * 3.6;
+
+    document.getElementById("ring").style.background =
+        `conic-gradient(
+            var(--green) ${degrees}deg,
+            #202631 ${degrees}deg
+        )`;
+
+}
+
+
+/* =========================
+   STREAK
+========================= */
+
+function updateStreak(){
+
+    let streak = 0;
+
+    for(
+        let i = 1;
+        i <= 60;
+        i++
+    ){
+
+        if(data.days.includes(i)){
+            streak++;
+        }else{
+            streak = 0;
+        }
+
+    }
+
+    document.getElementById("statStreak")
+        .innerText = streak + " 🔥";
+
+}
+
+
+/* =========================
+   WORKOUT
+========================= */
+
+function toggleWorkout(element){
+
+    element.classList.toggle("active");
+
+    if(element.classList.contains("active")){
+
+        data.workouts++;
+
+    }else{
+
+        data.workouts =
+            Math.max(0,data.workouts - 1);
+
+    }
+
+    saveData();
+    updateStats();
+
+}
+
+
+/* =========================
+   WEIGHT
+========================= */
+
+function saveWeight(){
+
+    const start =
+        document.getElementById("startWeight").value;
+
+    const current =
+        document.getElementById("currentWeight").value;
+
+    if(!start || !current){
+
+        alert("Isi berat awal dan berat sekarang dulu.");
+
+        return;
+
+    }
+
+    data.startWeight = start;
+    data.currentWeight = current;
+
+    saveData();
+
+    const difference =
+        (parseFloat(start) -
+        parseFloat(current)).toFixed(1);
+
+    document.getElementById("weightResult")
+        .innerText =
+        `Perubahan berat: ${difference} kg`;
+
+}
+
+
+/* =========================
+   LOAD WEIGHT
+========================= */
+
+function loadWeight(){
+
+    if(data.startWeight){
+
+        document.getElementById("startWeight")
+            .value = data.startWeight;
+
+    }
+
+    if(data.currentWeight){
+
+        document.getElementById("currentWeight")
+            .value = data.currentWeight;
+
+    }
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        "60dayReset",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
+
+let playing = false;
+
+function toggleMusic(){
+
+    const music =
+        document.getElementById("music");
+
+    const button =
+        document.getElementById("musicBtn");
+
+    if(!music.src){
+
+        alert(
+            "Masukkan file musik terlebih dahulu di bagian <audio> pada kode HTML."
+        );
+
+        return;
+
+    }
+
+    if(!playing){
+
+        music.play();
+
+        button.innerText =
+            "🎵 MUSIC ON";
+
+        playing = true;
+
+    }else{
+
+        music.pause();
+
+        button.innerText =
+            "🎵 MUSIC OFF";
+
+        playing = false;
+
+    }
+
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+function createParticle(){
+
+    const p =
+        document.createElement("div");
+
+    p.className = "particle";
+
+    p.style.left =
+        Math.random() * 100 + "vw";
+
+    p.style.animationDuration =
+        (5 + Math.random() * 7) + "s";
+
+    p.style.width =
+        (2 + Math.random() * 4) + "px";
+
+    p.style.height =
+        p.style.width;
+
+    document.body.appendChild(p);
+
+    setTimeout(
+        () => p.remove(),
+        12000
+    );
+
+}
+
+setInterval(
+    createParticle,
+    700
+);
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+loadWeight();
+
+updateStats();
+
+</script>
+
+</body>
+</html>
